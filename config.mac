@@ -1,0 +1,18 @@
+NAME=Genesis
+SLEEP=1800
+TASK=3
+N=C1
+
+LOG=logs
+APP=/Applications/Chia.app/Contents/Resources/app.asar.unpacked/daemon/chia
+B=3390
+R=2
+
+T=/Volumes/2T/cache
+D=/Volumes/plots
+# Customs 01
+P=83f0a82aae847f81faf84f9769434cdae2208bb6e4f7ba75b4bad15f7f7be9735daa4bf5c8bf2c9c736771a55105d293
+F=b3a236c23c8b03f4d4daeb4cccd8ad846178db6025ecddd9faa5ba64afd92a0706a3b88fae75b6643ed57bb4aeb61279
+# Liuren
+# P=b35a729c8d6dd8866af2fd300603edfe28d99a2653275f7abd88e0a9e619b841d221f0a03f20f70feedf543624acf810
+# F=b752b01e97f628a0caf838f502c9e7b414710d13c4878e3eafd8ee74788ae9d7386d12bdbeef28c114ed771595c74d94

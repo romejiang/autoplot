@@ -1,0 +1,65 @@
+#!/bin/bash
+
+source config 
+
+if [ ! -d $LOG ]; then
+    mkdir $LOG
+fi
+
+if [ -z $1 ]; then
+    grep --color 'Starting phase\|Total time' $LOG/*
+
+elif [ $1 == 'all' ]; then
+    grep --color 'Total time' $LOG/*
+    grep --color 'Total time' $LOG/* | wc -l | xargs echo
+
+elif [ $1 == 'today' ]; then
+    grep --color 'Total time' $LOG/* | grep --color `date '+%Y-%m-%d'`
+    grep --color 'Total time' $LOG/* | grep --color `date '+%Y-%m-%d'` | wc -l | xargs echo
+
+elif [ $1 == 'test' ]; then
+    last=0
+    while [ 1 ]
+    do 
+        source config 
+        tasks=`ps -ef|grep 'plot autoplot'|grep -v grep|wc -l`
+        timestamp=`date +%s` 
+        if [ $tasks -lt $TASK ];
+        then
+            between=$((${timestamp}-${last}))
+            
+            if [[ last -eq 0 ]] || [[ $between -ge $SLEEP ]];
+            then
+                last=${timestamp}
+                echo "开始新的任务：`date '+%Y-%m-%d %H:%M'`" 
+                nohup ./plot autoplot 2>&1 &
+            fi
+        fi
+        sleep 300
+    done
+
+elif [ $1 == 'plot' ]; then
+    for i in $(seq 1 $TASK)
+    do 
+        echo "task plots..."$i
+        echo "现在时间：`date '+%Y-%m-%d %H:%M'`"
+        # rm -Rf log$i.log
+        nohup ./plot autoplot 2>&1 &
+        # 没进程之间间隔30分钟
+        sleep 1800
+    done
+
+elif [ $1 == 'kill' ]; then
+    if [ 0"$OS" = "0Windows_NT" ]; then
+        kill -9 `ps -ef|grep 'chia'|grep -v grep|awk '{print $3}'`
+        kill -9 `ps -ef|grep 'chia'|grep -v grep|awk '{print $2}'`
+        kill -9 `ps -ef|grep 'sleep'|grep -v grep|awk '{print $3}'`
+        kill -9 `ps -ef|grep 'sleep'|grep -v grep|awk '{print $2}'`
+    else
+        ps -ef|grep 'chia plots'|grep -v grep|awk '{print $2}'|xargs kill -9
+        ps -ef|grep 'plot'|grep -v grep|awk '{print $2}'|xargs kill -9
+        ps -ef|grep 'sleep'|grep -v grep|awk '{print $2}'|xargs kill -9
+    fi
+    rm -Rf $T/*
+fi
+

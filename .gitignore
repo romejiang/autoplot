@@ -1,0 +1,21 @@
+# DynamoDB Local files
+.dynamodb/
+logs/
+npm-debug.log
+yarn-error.log
+node_modules/
+package-lock.json
+yarn.lock
+coverage/
+.idea/
+run/
+.DS_Store
+*.sw*
+*.un~
+#.vscode/
+app/public/uploads/
+test.css
+log*.log
+nohup.out
+config
+test.sh

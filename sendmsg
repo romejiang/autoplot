@@ -1,0 +1,28 @@
+#!/bin/bash
+# Filename: msg.sh
+# set +e
+# set -x
+source config 
+
+count=`ls $D/*.plot |wc -l| xargs echo`
+time0=`date "+%Y-%m-%d %H:%M:%S"`
+max=$((10#${count}*101))
+
+msg=$NAME'/'$max'G/'$1'小时/ '$NAME'完成'$N'的开垦🌈，总用时'$1'小时，现在总容量'$max'G🤟，完成时间：'$time0
+echo $msg
+
+result=`curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=92050e0d-b057-4ab9-aff4-565e75655b51' -H 'Content-Type: application/json' -d '
+{
+    "msgtype": "text",
+    "text": {
+        "content": "'"${msg}"'"
+  }
+}'`
+
+ret=`echo $result | cut -d ":" -f 3 | cut -d '"' -f 2`
+if [[ $ret == "ok" ]]; then
+	echo "success";
+else
+	echo "fail"
+fi
+
