@@ -35,7 +35,7 @@ elif [ $1 == 'test' ]; then
                 nohup ./plot 2>&1 &
             fi
         fi
-        sleep 300
+        sleep 60
     done
 
 elif [ $1 == 'plot' ]; then
