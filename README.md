@@ -5,7 +5,7 @@ Chia的P盘工具，支持滚动P盘，修改参数和环境不需要停止当�
 ### 安装
 
 ```
-get clone 
+get clone https://github.com/romejiang/autoplot.git
 
 # 复制配置
 
