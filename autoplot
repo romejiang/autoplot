@@ -22,7 +22,7 @@ elif [ $1 == 'test' ]; then
     while [ 1 ]
     do 
         source config 
-        tasks=`ps -ef|grep 'plot autoplot'|grep -v grep|wc -l`
+        tasks=`ps -ef|grep 'chia'|grep -v grep|wc -l`
         timestamp=`date +%s` 
         if [ $tasks -lt $TASK ];
         then

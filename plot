@@ -12,7 +12,5 @@ total=`grep 'Total time' $logfile|awk '{print $4}' | awk '{print int($1)}'`
 if [ -n "$total" ];
 then
   hour=$((${total}/3600))
-  sleep 120
   ./sendmsg $hour
-  sleep 120
 fi
