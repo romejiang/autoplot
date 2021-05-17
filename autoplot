@@ -51,14 +51,9 @@ elif [ $1 == 'plot' ]; then
 
 elif [ $1 == 'kill' ]; then
     if [ 0"$OS" = "0Windows_NT" ]; then
-        kill -9 `ps -ef|grep 'daemon/chia'|grep -v grep|awk '{print $2}'`
-        kill -9 `ps -ef|grep 'daemon/chia'|grep -v grep|awk '{print $3}'`
-        kill -9 `ps -ef|grep 'sleep'|grep -v grep|awk '{print $3}'`
-        kill -9 `ps -ef|grep 'sleep'|grep -v grep|awk '{print $2}'`
+        ps|grep 'daemon/chia'|grep -v grep|awk '{print $4}' | while read line; do echo $line | xargs taskkill -F -PID; done;
     else
         ps -ef|grep 'daemon/chia plots'|grep -v grep|awk '{print $2}'|xargs kill -9
-        ps -ef|grep 'plot'|grep -v grep|awk '{print $2}'|xargs kill -9
-        ps -ef|grep 'sleep'|grep -v grep|awk '{print $2}'|xargs kill -9
     fi
     rm -Rf $T/*
 fi
