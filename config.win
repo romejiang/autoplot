@@ -3,12 +3,16 @@ SLEEP=1800
 TASK=4
 N=C1
 
+WXKEY=
+LOG=logs
 APP=/c/Users/liure/AppData/Local/chia-blockchain/app-1.1.5/resources/app.asar.unpacked/daemon/chia.exe
 B=3390
 R=2
+
 T=/d/temp
 D=/z/c1
+
 P=83f0a82aae847f81faf84f9769434cdae2208bb6e4f7ba75b4bad15f7f7be9735daa4bf5c8bf2c9c736771a55105d293
 F=b3a236c23c8b03f4d4daeb4cccd8ad846178db6025ecddd9faa5ba64afd92a0706a3b88fae75b6643ed57bb4aeb61279
-LOG=logs
+
 

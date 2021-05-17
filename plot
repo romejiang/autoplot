@@ -13,6 +13,6 @@ if [ -n "$total" ];
 then
   hour=$((${total}/3600))
   sleep 120
-  ./sendkey.sh $hour
+  ./sendmsg $hour
   sleep 120
 fi
