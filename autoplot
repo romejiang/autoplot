@@ -22,7 +22,7 @@ elif [ $1 == 'test' ]; then
     while [ 1 ]
     do 
         source config 
-        tasks=`ps -ef|grep 'chia'|grep -v grep|wc -l`
+        tasks=`ps -ef|grep 'daemon/chia'|grep -v grep|wc -l`
         timestamp=`date +%s` 
         if [ $tasks -lt $TASK ];
         then
@@ -32,7 +32,7 @@ elif [ $1 == 'test' ]; then
             then
                 last=${timestamp}
                 echo "开始新的任务：`date '+%Y-%m-%d %H:%M'`" 
-                nohup ./plot autoplot 2>&1 &
+                nohup ./plot 2>&1 &
             fi
         fi
         sleep 300
@@ -51,12 +51,12 @@ elif [ $1 == 'plot' ]; then
 
 elif [ $1 == 'kill' ]; then
     if [ 0"$OS" = "0Windows_NT" ]; then
-        kill -9 `ps -ef|grep 'chia'|grep -v grep|awk '{print $3}'`
-        kill -9 `ps -ef|grep 'chia'|grep -v grep|awk '{print $2}'`
+        kill -9 `ps -ef|grep 'daemon/chia'|grep -v grep|awk '{print $2}'`
+        kill -9 `ps -ef|grep 'daemon/chia'|grep -v grep|awk '{print $3}'`
         kill -9 `ps -ef|grep 'sleep'|grep -v grep|awk '{print $3}'`
         kill -9 `ps -ef|grep 'sleep'|grep -v grep|awk '{print $2}'`
     else
-        ps -ef|grep 'chia plots'|grep -v grep|awk '{print $2}'|xargs kill -9
+        ps -ef|grep 'daemon/chia plots'|grep -v grep|awk '{print $2}'|xargs kill -9
         ps -ef|grep 'plot'|grep -v grep|awk '{print $2}'|xargs kill -9
         ps -ef|grep 'sleep'|grep -v grep|awk '{print $2}'|xargs kill -9
     fi
