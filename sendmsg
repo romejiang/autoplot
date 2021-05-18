@@ -7,8 +7,11 @@ count=`ls $D/*.plot |wc -l| xargs echo`
 time0=`date "+%Y-%m-%d %H:%M:%S"`
 max=$((10#${count}*101))
 
-# msg=$NAME'/'$max'G/'$1'小时/ '$NAME'完成'$N'的开垦🌈，总用时'$1'小时，现在总容量'$max'G🤟，完成时间：'$time0
-msg=$NAME'|'$max'G|'$1' hour|'$NAME' completed '$N' is plot task🌈, elapsed time '$1' hour, total capacity '$max'G🤟, now '$time0
+if [ 0"$OS" = "0Windows_NT" ]; then
+  msg=$NAME'/'$max'G/'$1' hour/ '$NAME' completed '$N' is plot task, elapsed time '$1' hour, total capacity '$max'G, now '$time0
+else
+  msg=$NAME'/'$max'G/'$1'小时/ '$NAME'完成'$N'的开垦🌈，总用时'$1'小时，现在总容量'$max'G🤟。时间：'$time0
+fi
 echo $msg
 
 result=`curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key='"${WXKEY}"'' -H 'Content-Type: application/json' -d '
