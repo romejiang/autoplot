@@ -22,7 +22,11 @@ elif [ $1 == 'test' ]; then
     while [ 1 ]
     do 
         source config 
-        tasks=`ps -ef|grep 'daemon/chia'|grep -v grep|wc -l`
+        if [ 0"$OS" = "0Windows_NT" ]; then
+            tasks=`WMIC path win32_process get Commandline|grep chia.exe|grep -v grep|wc -l`
+        else
+            tasks=`ps -ef|grep 'daemon/chia'|grep -v grep|wc -l`
+        fi
         timestamp=`date +%s` 
         if [ $tasks -lt $TASK ];
         then
