@@ -28,6 +28,7 @@ elif [ $1 == 'test' ]; then
             tasks=`ps -ef|grep 'daemon/chia'|grep -v grep|wc -l`
         fi
         timestamp=`date +%s` 
+        echo $tasks $TASK
         if [ $tasks -lt $TASK ];
         then
             between=$((${timestamp}-${last}))
