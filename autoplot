@@ -17,7 +17,7 @@ elif [ $1 == 'today' ]; then
     grep --color 'Total time' $LOG/* | grep --color `date '+%Y-%m-%d'`
     grep --color 'Total time' $LOG/* | grep --color `date '+%Y-%m-%d'` | wc -l | xargs echo
 
-elif [ $1 == 'test' ]; then
+elif [ $1 == 'plot' ]; then
     last=0
     while [ 1 ]
     do 
@@ -43,7 +43,7 @@ elif [ $1 == 'test' ]; then
         sleep 60
     done
 
-elif [ $1 == 'plot' ]; then
+elif [ $1 == 'old' ]; then
     for i in $(seq 1 $TASK)
     do 
         echo "task plots..."$i
@@ -60,6 +60,7 @@ elif [ $1 == 'kill' ]; then
     else
         ps -ef|grep 'chia plots'|grep -v grep|awk '{print $2}'|xargs kill -9
     fi
+    sleep 3
     rm -Rf $T/*
 fi
 
