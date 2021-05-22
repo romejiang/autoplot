@@ -3,7 +3,7 @@
 # set -x
 source config 
 
-count=`ls $D/*.plot |wc -l| xargs echo`
+count=`ls $2/*.plot |wc -l| xargs echo`
 time0=`date "+%Y-%m-%d %H:%M:%S"`
 max=$((10#${count}*101))
 
