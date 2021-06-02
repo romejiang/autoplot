@@ -2,10 +2,10 @@
 
 source config 
 
-if [ ! -d $T]; then
+if [ ! -d $T ]; then
     mkdir $T
 fi
-if [ ! -d $D]; then
+if [ ! -d $D ]; then
     mkdir $D
 fi
 
@@ -15,7 +15,7 @@ logfile=${LOG}/${time0}.log
 echo $APP plots create -k32 -t$T -d$D -b$B -u128 -r$R -x -f $F -p $P
 echo $logfile
 $APP plots create -k32 -t$T -d$D -b$B -u128 -r$R -x -f $F -p $P > $logfile 2>&1
-
+echo $!
 total=`grep 'Total time' $logfile|awk '{print $4}' | awk '{print int($1)}'`
 if [ -n "$total" ];
 then

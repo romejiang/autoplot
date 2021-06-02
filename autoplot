@@ -28,7 +28,7 @@ elif [ $1 == 'plot' ]; then
             tasks=`ps -ef|grep 'chia plots'|grep -v grep|wc -l`
         fi
         timestamp=`date +%s` 
-        echo $tasks $TASK
+        # echo $tasks $TASK
         if [ $tasks -lt $TASK ];
         then
             between=$((${timestamp}-${last}))
