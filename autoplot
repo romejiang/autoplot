@@ -42,7 +42,31 @@ elif [ $1 == 'plot' ]; then
         fi
         sleep 60
     done
-
+elif [ $1 == 'plot2' ]; then
+    last=0
+    while [ 1 ]
+    do 
+        source config 
+        if [ 0"$OS" = "0Windows_NT" ]; then
+            tasks=`WMIC path win32_process get Commandline|grep chia_plot.exe|grep -v grep|wc -l`
+        else
+            tasks=`ps -ef|grep 'chia_plot'|grep -v grep|wc -l`
+        fi
+        timestamp=`date +%s` 
+        # echo $tasks $TASK
+        if [ $tasks -lt $TASK ];
+        then
+            between=$((${timestamp}-${last}))
+            
+            if [[ last -eq 0 ]] || [[ $between -ge $SLEEP ]];
+            then
+                last=${timestamp}
+                echo "开始新的任务：`date '+%Y-%m-%d %H:%M'`" 
+                nohup ./plot2 2>&1 &
+            fi
+        fi
+        sleep 60
+    done
 elif [ $1 == 'old' ]; then
     for i in $(seq 1 $TASK)
     do 
